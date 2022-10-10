@@ -1,4 +1,7 @@
+from inspect import currentframe
 import re
+from utils import *
+from pathlib import Path
 
 IMPORTS = ['import org.junit.*']
 ANNOTATIONS = ['@Test', '@RunWith']
@@ -58,5 +61,22 @@ def analyze_file(file):
             "ANNOTATIONS": [a[0] for a in annotations_found],
             "IMPORTS": [i[0] for i in imports_found]
         })
+
+def analyze_test_directories(base_dir):
+    for test_dir in get_test_directories(base_dir):
+        for path in Path(test_dir).rglob('*.java'):
+            if re.search("Test", str(path.resolve()).split(".")[-2]): 
+                print(path)
+                analyze_file(path)
+
+    print("----------------------------")
+
+def get_build_lib(root_files, current_dir):
+    if 'pom.xml' in root_files:
+        return 'maven'
+    elif 'build.gradle' in root_files:
+        return 'gradle'
+    else:
+        return None
 
     
