@@ -2,10 +2,10 @@ import subprocess
 from scraper import *
 from utils import *
 
-PROJECTS_DIR = '../projetos/'
+PROJECTS_DIR = '../../projetos/'
 
 TEST_COMMANDS = {
-    'maven': 'mvn clean test',
+    'maven': 'mvn clean test -Denforcer.skip=true',
     'gradle': './gradlew test'
 }
 
