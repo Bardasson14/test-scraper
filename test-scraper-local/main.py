@@ -18,8 +18,13 @@ if __name__ == "__main__":
 
         if build_lib:
             subprocess.call(TEST_COMMANDS[build_lib], shell=True, cwd=full_dir)
+            cmd = f"./RefactoringMiner/build/distributions/RefactoringMiner-2.3.2/bin/RefactoringMiner -a ../../projetos/{project_dir}/ master -json ../{project_dir}.json"
+            print(cmd)
+            return_value = subprocess.call(cmd, shell=True)
+       
+	    
         else:
             print("FRAMEWORK INCOMPATÍVEL!")
-
+	
         # TODO: fix test running
         # TODO: run refactoringminer from here  
