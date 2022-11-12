@@ -1,0 +1,302 @@
+{
+    "JavaGuide": {
+        "clone_url": "https://github.com/Snailclimb/JavaGuide.git"
+    },
+    "java-design-patterns": {
+        "clone_url": "https://github.com/iluwatar/java-design-patterns.git"
+    },
+    "LeetCodeAnimation": {
+        "clone_url": "https://github.com/MisterBooo/LeetCodeAnimation.git"
+    },
+    "advanced-java": {
+        "clone_url": "https://github.com/doocs/advanced-java.git"
+    },
+    "spring-boot": {
+        "clone_url": "https://github.com/spring-projects/spring-boot.git"
+    },
+    "mall": {
+        "clone_url": "https://github.com/macrozheng/mall.git"
+    },
+    "elasticsearch": {
+        "clone_url": "https://github.com/elastic/elasticsearch.git"
+    },
+    "interviews": {
+        "clone_url": "https://github.com/kdn251/interviews.git"
+    },
+    "GitHub-Chinese-Top-Charts": {
+        "clone_url": "https://github.com/GrowingGit/GitHub-Chinese-Top-Charts.git"
+    },
+    "spring-framework": {
+        "clone_url": "https://github.com/spring-projects/spring-framework.git"
+    },
+    "Java": {
+        "clone_url": "https://github.com/TheAlgorithms/Java.git"
+    },
+    "RxJava": {
+        "clone_url": "https://github.com/ReactiveX/RxJava.git"
+    },
+    "guava": {
+        "clone_url": "https://github.com/google/guava.git"
+    },
+    "retrofit": {
+        "clone_url": "https://github.com/square/retrofit.git"
+    },
+    "dubbo": {
+        "clone_url": "https://github.com/apache/dubbo.git"
+    },
+    "ghidra": {
+        "clone_url": "https://github.com/NationalSecurityAgency/ghidra.git"
+    },
+    "MPAndroidChart": {
+        "clone_url": "https://github.com/PhilJay/MPAndroidChart.git"
+    },
+    "lottie-android": {
+        "clone_url": "https://github.com/airbnb/lottie-android.git"
+    },
+    "glide": {
+        "clone_url": "https://github.com/bumptech/glide.git"
+    },
+    "tutorials": {
+        "clone_url": "https://github.com/eugenp/tutorials.git"
+    },
+    "jadx": {
+        "clone_url": "https://github.com/skylot/jadx.git"
+    },
+    "jeecg-boot": {
+        "clone_url": "https://github.com/jeecgboot/jeecg-boot.git"
+    },
+    "AndroidUtilCode": {
+        "clone_url": "https://github.com/Blankj/AndroidUtilCode.git"
+    },
+    "hello-algorithm": {
+        "clone_url": "https://github.com/geekxh/hello-algorithm.git"
+    },
+    "arthas": {
+        "clone_url": "https://github.com/alibaba/arthas.git"
+    },
+    "zxing": {
+        "clone_url": "https://github.com/zxing/zxing.git"
+    },
+    "netty": {
+        "clone_url": "https://github.com/netty/netty.git"
+    },
+    "dbeaver": {
+        "clone_url": "https://github.com/dbeaver/dbeaver.git"
+    },
+    "spring-boot-examples": {
+        "clone_url": "https://github.com/ityouknow/spring-boot-examples.git"
+    },
+    "spring-boot-demo": {
+        "clone_url": "https://github.com/xkcoding/spring-boot-demo.git"
+    },
+    "apollo": {
+        "clone_url": "https://github.com/apolloconfig/apollo.git"
+    },
+    "JCSprout": {
+        "clone_url": "https://github.com/crossoverJie/JCSprout.git"
+    },
+    "druid": {
+        "clone_url": "https://github.com/alibaba/druid.git"
+    },
+    "easyexcel": {
+        "clone_url": "https://github.com/alibaba/easyexcel.git"
+    },
+    "butterknife": {
+        "clone_url": "https://github.com/JakeWharton/butterknife.git"
+    },
+    "miaosha": {
+        "clone_url": "https://github.com/qiurunze123/miaosha.git"
+    },
+    "proxyee-down": {
+        "clone_url": "https://github.com/proxyee-down-org/proxyee-down.git"
+    },
+    "vhr": {
+        "clone_url": "https://github.com/lenve/vhr.git"
+    },
+    "selenium": {
+        "clone_url": "https://github.com/SeleniumHQ/selenium.git"
+    },
+    "fastjson": {
+        "clone_url": "https://github.com/alibaba/fastjson.git"
+    },
+    "nacos": {
+        "clone_url": "https://github.com/alibaba/nacos.git"
+    },
+    "SpringAll": {
+        "clone_url": "https://github.com/wuyouzhuguli/SpringAll.git"
+    },
+    "canal": {
+        "clone_url": "https://github.com/alibaba/canal.git"
+    },
+    "hutool": {
+        "clone_url": "https://github.com/dromara/hutool.git"
+    },
+    "halo": {
+        "clone_url": "https://github.com/halo-dev/halo.git"
+    },
+    "EventBus": {
+        "clone_url": "https://github.com/greenrobot/EventBus.git"
+    },
+    "spring-cloud-alibaba": {
+        "clone_url": "https://github.com/alibaba/spring-cloud-alibaba.git"
+    },
+    "toBeTopJavaer": {
+        "clone_url": "https://github.com/hollischuang/toBeTopJavaer.git"
+    },
+    "SmartRefreshLayout": {
+        "clone_url": "https://github.com/scwang90/SmartRefreshLayout.git"
+    },
+    "kafka": {
+        "clone_url": "https://github.com/apache/kafka.git"
+    },
+    "BaseRecyclerViewAdapterHelper": {
+        "clone_url": "https://github.com/CymChad/BaseRecyclerViewAdapterHelper.git"
+    },
+    "Hystrix": {
+        "clone_url": "https://github.com/Netflix/Hystrix.git"
+    },
+    "Signal-Android": {
+        "clone_url": "https://github.com/signalapp/Signal-Android.git"
+    },
+    "seata": {
+        "clone_url": "https://github.com/seata/seata.git"
+    },
+    "xxl-job": {
+        "clone_url": "https://github.com/xuxueli/xxl-job.git"
+    },
+    "NewPipe": {
+        "clone_url": "https://github.com/TeamNewPipe/NewPipe.git"
+    },
+    "gson": {
+        "clone_url": "https://github.com/google/gson.git"
+    },
+    "Telegram": {
+        "clone_url": "https://github.com/DrKLO/Telegram.git"
+    },
+    "skywalking": {
+        "clone_url": "https://github.com/apache/skywalking.git"
+    },
+    "libgdx": {
+        "clone_url": "https://github.com/libgdx/libgdx.git"
+    },
+    "Sentinel": {
+        "clone_url": "https://github.com/alibaba/Sentinel.git"
+    },
+    "redisson": {
+        "clone_url": "https://github.com/redisson/redisson.git"
+    },
+    "flink": {
+        "clone_url": "https://github.com/apache/flink.git"
+    },
+    "ExoPlayer": {
+        "clone_url": "https://github.com/google/ExoPlayer.git"
+    },
+    "jenkins": {
+        "clone_url": "https://github.com/jenkinsci/jenkins.git"
+    },
+    "RxAndroid": {
+        "clone_url": "https://github.com/ReactiveX/RxAndroid.git"
+    },
+    "bazel": {
+        "clone_url": "https://github.com/bazelbuild/bazel.git"
+    },
+    "DoKit": {
+        "clone_url": "https://github.com/didi/DoKit.git"
+    },
+    "eladmin": {
+        "clone_url": "https://github.com/elunez/eladmin.git"
+    },
+    "PhotoView": {
+        "clone_url": "https://github.com/Baseflow/PhotoView.git"
+    },
+    "rocketmq": {
+        "clone_url": "https://github.com/apache/rocketmq.git"
+    },
+    "FizzBuzzEnterpriseEdition": {
+        "clone_url": "https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition.git"
+    },
+    "leetcode": {
+        "clone_url": "https://github.com/doocs/leetcode.git"
+    },
+    "GSYVideoPlayer": {
+        "clone_url": "https://github.com/CarGuo/GSYVideoPlayer.git"
+    },
+    "mybatis-3": {
+        "clone_url": "https://github.com/mybatis/mybatis-3.git"
+    },
+    "graal": {
+        "clone_url": "https://github.com/oracle/graal.git"
+    },
+    "shardingsphere": {
+        "clone_url": "https://github.com/apache/shardingsphere.git"
+    },
+    "litemall": {
+        "clone_url": "https://github.com/linlinjava/litemall.git"
+    },
+    "HikariCP": {
+        "clone_url": "https://github.com/brettwooldridge/HikariCP.git"
+    },
+    "cat": {
+        "clone_url": "https://github.com/dianping/cat.git"
+    },
+    "termux-app": {
+        "clone_url": "https://github.com/termux/termux-app.git"
+    },
+    "SpringCloudLearning": {
+        "clone_url": "https://github.com/forezp/SpringCloudLearning.git"
+    },
+    "fresco": {
+        "clone_url": "https://github.com/facebook/fresco.git"
+    },
+    "Android-Universal-Image-Loader": {
+        "clone_url": "https://github.com/nostra13/Android-Universal-Image-Loader.git"
+    },
+    "tinker": {
+        "clone_url": "https://github.com/Tencent/tinker.git"
+    },
+    "zheng": {
+        "clone_url": "https://github.com/shuzheng/zheng.git"
+    },
+    "Mindustry": {
+        "clone_url": "https://github.com/Anuken/Mindustry.git"
+    },
+    "java8-tutorial": {
+        "clone_url": "https://github.com/winterbe/java8-tutorial.git"
+    },
+    "zipkin": {
+        "clone_url": "https://github.com/openzipkin/zipkin.git"
+    },
+    "SpringBoot-Labs": {
+        "clone_url": "https://github.com/YunaiV/SpringBoot-Labs.git"
+    },
+    "disruptor": {
+        "clone_url": "https://github.com/LMAX-Exchange/disruptor.git"
+    },
+    "Android-CleanArchitecture": {
+        "clone_url": "https://github.com/android10/Android-CleanArchitecture.git"
+    },
+    "springboot-learning-example": {
+        "clone_url": "https://github.com/JeffLi1993/springboot-learning-example.git"
+    },
+    "Apktool": {
+        "clone_url": "https://github.com/iBotPeaches/Apktool.git"
+    },
+    "SpringBoot-Learning": {
+        "clone_url": "https://github.com/dyc87112/SpringBoot-Learning.git"
+    },
+    "elasticsearch-analysis-ik": {
+        "clone_url": "https://github.com/medcl/elasticsearch-analysis-ik.git"
+    },
+    "jdk": {
+        "clone_url": "https://github.com/openjdk/jdk.git"
+    },
+    "openapi-generator": {
+        "clone_url": "https://github.com/OpenAPITools/openapi-generator.git"
+    },
+    "CircleImageView": {
+        "clone_url": "https://github.com/hdodenhof/CircleImageView.git"
+    },
+    "presto": {
+        "clone_url": "https://github.com/prestodb/presto.git"
+    }
+}
