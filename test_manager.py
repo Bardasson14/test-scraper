@@ -24,6 +24,7 @@ class TestManager:
         print("build_lib: %s" % build_lib)
         if build_lib:
             subprocess.call(TEST_COMMANDS[build_lib], shell=True, cwd=root_dir)
+            subprocess.call("./refactoring_miner/bin/RefactoringMiner -a {} master -json {}.json".format(root_dir, root_dir))
         else:
             print("Suíte não encontrada para o Projeto %s" % repository)
     
