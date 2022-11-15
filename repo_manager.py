@@ -68,6 +68,9 @@ class RepoManager:
 
             if os.path.exists(dir):
                 shutil.rmtree(dir)
+            else:
+                if not os.path.exists("./projects/"):
+                    os.mkdir("./projects/")
 
             print("metadata: %s" % metadata)
 
