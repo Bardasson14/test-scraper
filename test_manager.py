@@ -46,8 +46,8 @@ class TestManager:
 
         if 'pom.xml' in root_files:
             return 'maven'
-        # elif 'build.gradle' in root_files:
-        #     return 'gradle'
+        elif 'build.gradle' in root_files:
+            return 'gradle'
         else:
             return None
 

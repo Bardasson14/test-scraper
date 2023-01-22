@@ -4,44 +4,9 @@
             "repos": [
                 {
                     "repo": {
-                        "url": "https://github.com/cgeo/cgeo",
-                        "name": "cgeo",
-                        "description": "c:geo - The powerful Android geocaching app."
-                    }
-                },
-                {
-                    "repo": {
-                        "url": "https://github.com/vespa-engine/vespa",
-                        "name": "vespa",
-                        "description": "The open big data serving engine. https://vespa.ai"
-                    }
-                },
-                {
-                    "repo": {
                         "url": "https://github.com/kiegroup/drools",
                         "name": "drools",
                         "description": "Drools is a rule engine, DMN engine and complex event processing (CEP) engine for Java."
-                    }
-                },
-                {
-                    "repo": {
-                        "url": "https://github.com/kestra-io/kestra",
-                        "name": "kestra",
-                        "description": "Kestra is an infinitely scalable orchestration and scheduling platform, creating, running, scheduling, and monitoring millions of complex pipelines."
-                    }
-                },
-                {
-                    "repo": {
-                        "url": "https://github.com/i2p/i2p.i2p",
-                        "name": "i2p.i2p",
-                        "description": "I2P is an anonymizing network, offering a simple layer that identity-sensitive applications can use to securely communicate. All data is wrapped with several layers of encryption, and the network is both distributed and dynamic, with no trusted parties. "
-                    }
-                },
-                {
-                    "repo": {
-                        "url": "https://github.com/GoogleCloudPlatform/java-docs-samples",
-                        "name": "java-docs-samples",
-                        "description": "Java and Kotlin Code samples used on cloud.google.com"
                     }
                 },
                 {
@@ -56,20 +21,6 @@
                         "url": "https://github.com/elastic/elasticsearch",
                         "name": "elasticsearch",
                         "description": "Free and Open, Distributed, RESTful Search Engine"
-                    }
-                },
-                {
-                    "repo": {
-                        "url": "https://github.com/Azure/azure-sdk-for-java",
-                        "name": "azure-sdk-for-java",
-                        "description": "This repository is for active development of the Azure SDK for Java. For consumers of the SDK we recommend visiting our public developer docs at https://docs.microsoft.com/java/azure/ or our versioned developer docs at https://azure.github.io/azure-sdk-for-java. "
-                    }
-                },
-                {
-                    "repo": {
-                        "url": "https://github.com/dbeaver/dbeaver",
-                        "name": "dbeaver",
-                        "description": "Free universal database tool and SQL client"
                     }
                 },
                 {

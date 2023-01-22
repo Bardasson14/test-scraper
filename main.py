@@ -15,7 +15,7 @@ if __name__ == "__main__":
     test_manager = TestManager()
     # repo_manager.execute_request()
     repo_list = repo_manager.clone_all("repos.json")
-    for repository in repo_list[:3]:
+    for repository in repo_list:
         print("repository: %s" % repository)
         test_manager.run_test_suite(repository["repo"]["name"])
 

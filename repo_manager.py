@@ -61,19 +61,15 @@ class RepoManager:
         with open(file, "r") as f:
             repo_list = json.load(f)["data"]["search"]["repos"]
 
-        for repo in repo_list[:5]:
+        for repo in repo_list:
             metadata = repo["repo"]
-
             dir = "./projects/{}".format(metadata["name"])
-
             if os.path.exists(dir):
                 shutil.rmtree(dir)
             else:
                 if not os.path.exists("./projects/"):
                     os.mkdir("./projects/")
-
             print("metadata: %s" % metadata)
-
             subprocess.call("git clone {}".format(metadata["url"]), shell=True, cwd="./projects/")
 
-        return repo_list
+        return repo_list#[1:]
