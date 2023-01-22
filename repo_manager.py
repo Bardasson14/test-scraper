@@ -13,7 +13,7 @@ class RepoManager:
             'https://api.github.com/graphql',
             json={'query': self.get_query()},
             headers= {
-                "Authorization": "Bearer {}".format(os.environ.get('GITHUB_TOKEN'))
+                "Authorization": "Bearer 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"
             }
         )
 
@@ -29,7 +29,7 @@ class RepoManager:
                 search(
                     type:REPOSITORY,
                     query: "%s",
-                    first: 100
+                    last: 100
                 ) 
                 {
                     repos: edges {
@@ -47,7 +47,7 @@ class RepoManager:
 
     def get_search_params(self):
         # TODO: incluir time range na filtragem
-        return 'stars:>={} is:public language:Java'.format(self.minimum_stars)
+        return 'stars:>={} is:public language:Java sort:updated-desc'.format(self.minimum_stars)
 
     def persist_repositories(self, resp, file):
         with open(file, "w") as f:
@@ -61,7 +61,7 @@ class RepoManager:
         with open(file, "r") as f:
             repo_list = json.load(f)["data"]["search"]["repos"]
 
-        for repo in repo_list[:3]:
+        for repo in repo_list[:5]:
             metadata = repo["repo"]
 
             dir = "./projects/{}".format(metadata["name"])
