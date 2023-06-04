@@ -29,7 +29,22 @@ def find_annotations(line, index):
 
     return annotations_found
 
-def gather_info(annotations_found, imports_found, line, index):
+def find_methods(line, index):
+    REGEX = '(public|protected|private|static|\s) +[\w\<\>\[\]]+\s+(\w+) *\([^\)]*\) *(\{?|[^;])'
+    found = re.search(REGEX, line)
+
+    if found:
+        return ("'{}' - line {}").format(line.strip(), index)
+
+def gather_method_info(methods_found, line, index):
+    method_found = find_methods(line, index)
+
+    if method_found:
+        methods_found.append(method_found)
+
+    return methods_found
+
+def gather_test_info(annotations_found, imports_found, line, index):
 
     annotation_found = find_annotations(line, index)
     import_found = find_imports(line, index)
@@ -47,7 +62,20 @@ def display_results(results):
         print("{} FOUND: {}".format(key, value))
 
 
-def analyze_file(file):
+def analyze_methods(file, found_methods):
+    with open(file, 'r') as f:
+        lines = f.readlines()
+
+        methods_found = []
+
+        for i in range(len(lines)):
+            json_dict = { 'METHODS': [] }
+            methods_found = gather_method_info(methods_found, lines[i], i)
+            json_dict['METHODS'] = methods_found
+        
+        found_methods[f.name.split('/')[-1]] = json_dict
+
+def analyze_tests(file, found_tests):
     with open(file, 'r') as f:
         lines = f.readlines()
 
@@ -55,21 +83,26 @@ def analyze_file(file):
         imports_found = []
 
         for i in range(len(lines)):
-            annotations_found, imports_found = gather_info(annotations_found, imports_found, lines[i], i)
+            annotations_found, imports_found = gather_test_info(annotations_found, imports_found, lines[i], i)
+            json_dict = { 'ANNOTATIONS': [], 'IMPORTS': [] }
+            for annotation in annotations_found:
+                json_dict['ANNOTATIONS'].append(annotation[0])
 
-        display_results({
-            "ANNOTATIONS": [a[0] for a in annotations_found],
-            "IMPORTS": [i[0] for i in imports_found]
-        })
+            for found_import in imports_found:
+                json_dict['IMPORTS'].append(found_import[0])
+        
+        found_tests[f.name] = json_dict
 
-def analyze_test_directories(base_dir):
+def analyze_test_directories(base_dir, found_tests):
     for test_dir in get_test_directories(base_dir):
         for path in Path(test_dir).rglob('*.java'):
             if re.search("Test", str(path.resolve()).split(".")[-2]): 
-                print(path)
-                analyze_file(path)
+                analyze_tests(path, found_tests) # path | content_lines| json_dict
 
-    print("----------------------------")
+def analyze_class_directories(base_dir, found_methods):
+    for class_dir in get_test_directories(base_dir):
+        for path in Path(class_dir).rglob('*.java'):
+                analyze_methods(path, found_methods) # path | content_lines| json_dict
 
 def get_build_lib(root_files, current_dir):
     if 'pom.xml' in root_files:

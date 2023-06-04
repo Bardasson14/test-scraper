@@ -65,8 +65,8 @@ def analyze_file(lines,file_path,json_list):
         json_list[key]=data
 
     # display_results({
-    #     "ANNOTATIONS": [a[0] for a in annotations_found],
-    #     "IMPORTS": [i[0] for i in imports_found]
+    #     "ANNOTATIONS": [a for a in annotations_found],
+    #     "IMPORTS": [i for i in imports_found]
     # })
 
 
