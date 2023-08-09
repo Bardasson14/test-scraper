@@ -33,7 +33,7 @@ def analyze_commit(project_name, commit_hash):
     json.dump(found_tests, f1)
     f1.close()
 
-    f2 = open(f"{outp ut_dir}/method_locations.json", 'w')
+    f2 = open(f"{output_dir}/method_locations.json", 'w')
     json.dump(found_methods, f2)
     f2.close()
     
