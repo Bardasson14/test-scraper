@@ -10,6 +10,7 @@ TEST_COMMANDS = {
 }
 
 if __name__ == "__main__":
+    print(os.listdir())
     for project_dir in os.listdir(PROJECTS_DIR):
         full_dir = PROJECTS_DIR + project_dir
         found_tests = {}
