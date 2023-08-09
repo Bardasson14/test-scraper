@@ -10,7 +10,10 @@ RUN apt-get update
 RUN apt-get install git python3 -y
 RUN echo $(python --version)
 
-# Clona os repositórios
+# Configura ownership do git
+RUN git config --global --add safe.directory /app
+
+# Clona os repositórios (TODO: automatizar mkdirs e listagem de repos que serão clonados)
 RUN mkdir /projects
 RUN mkdir /projects/jenkins
 RUN git clone https://github.com/jenkinsci/jenkins.git /projects/jenkins
