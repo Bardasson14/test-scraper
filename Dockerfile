@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Instala as dependências
 RUN apt-get update
-RUN apt-get install git python3 gnupg2 -y
+RUN apt-get install git python3 -y
 RUN apt-get install openjdk-17-jre-headless -y
 
 # Configura ownership do git
