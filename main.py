@@ -15,6 +15,7 @@ TEST_COMMANDS = {
 
 def analyze_commit(project_name, commit_hash):
     # TODO: split into functions
+    # TODO: make optimizations
     output_dir = f"output/{project_name}/{commit_hash}"
     full_dir = PROJECTS_DIR + project_name
 
