@@ -48,9 +48,11 @@ def analyze_commit(project_name, commit_hash):
     f3.close()
     
     total_tests = 0
+    total_assertions = 0
     total_methods = 0
 
     for test_class in found_tests.keys():
+        total_assertions += len(found_tests[test_class]['ASSERTIONS'])
         total_tests += len(found_tests[test_class]['ANNOTATIONS'])
 
     for prod_class in found_methods.keys():
@@ -59,6 +61,7 @@ def analyze_commit(project_name, commit_hash):
     print(f"{project_name} [{commit_hash}]")
     print("TESTES: ", total_tests)
     print("MÉTODOS: ", total_methods)
+    print("ASSERTIONS: ", total_assertions)
 
 
 if __name__ == "__main__":

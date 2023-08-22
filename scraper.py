@@ -35,6 +35,13 @@ def find_methods(line, index):
 
     if found:
         return ("'{}' - line {}").format(line.strip(), index)
+    
+def find_assertions(line, index):
+    REGEX = 'assert\w+\((.*?)\);'
+    found = re.search(REGEX, line)
+
+    if found:
+        return ("'{}' - line {}").format(line.strip(), index)
 
 def gather_method_info(methods_found, line, index):
     method_found = find_methods(line, index)
@@ -44,18 +51,22 @@ def gather_method_info(methods_found, line, index):
 
     return methods_found
 
-def gather_test_info(annotations_found, imports_found, line, index):
+def gather_test_info(annotations_found, imports_found, assertions_found, line, index):
 
     annotation_found = find_annotations(line, index)
     import_found = find_imports(line, index)
+    assertion_found = find_assertions(line, index)
 
     if annotation_found:
         annotations_found.append(annotation_found)
 
     if import_found:
         imports_found.append(import_found)
+    
+    if assertion_found:
+        assertions_found.append(assertion_found)
 
-    return annotations_found, imports_found
+    return annotations_found, imports_found, assertions_found
 
 def display_results(results):
     for key, value in results.items():
@@ -81,15 +92,21 @@ def analyze_tests(file, found_tests):
 
         annotations_found = []
         imports_found = []
+        assertions_found = []
 
         for i in range(len(lines)):
-            annotations_found, imports_found = gather_test_info(annotations_found, imports_found, lines[i], i)
-            json_dict = { 'ANNOTATIONS': [], 'IMPORTS': [] }
-            for annotation in annotations_found:
-                json_dict['ANNOTATIONS'].append(annotation[0])
+            annotations_found, imports_found, assertions_found = gather_test_info(annotations_found, imports_found, assertions_found, lines[i], i)
+
+            json_dict = { 'ANNOTATIONS': [], 'IMPORTS': [], 'ASSERTIONS': [] }
+
+            for found_annotation in annotations_found:
+                json_dict['ANNOTATIONS'].append(found_annotation[0])
 
             for found_import in imports_found:
                 json_dict['IMPORTS'].append(found_import[0])
+            
+            for found_assertion in assertions_found:
+                json_dict['ASSERTIONS'].append(found_assertion)
         
         found_tests[f.name] = json_dict
 
