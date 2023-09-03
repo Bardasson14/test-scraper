@@ -8,7 +8,6 @@ from utils import get_directories_recursively
 from subprocess import run
 from services.file_system_service import FileSystemService
 from json import load
-import csv
 
 class CodeAnalyzer:
     def __init__(self, project):
@@ -42,6 +41,8 @@ class CodeAnalyzer:
             output_json_data = load(f)
             refactorings = []
 
+            if not output_json_data['commits']: return 
+
             for refactor in output_json_data['commits'][0]['refactorings']:
                 refactor_location = refactor['leftSideLocations'][0]
                 refactorings.append([refactor['type'], refactor_location['filePath'], refactor_location['startLine'], refactor_location['endLine']])
@@ -52,7 +53,6 @@ class CodeAnalyzer:
                 'LINHA INICIAL', 
                 'LINHA FINAL'
             ])
-            
             CsvWriterService(f"{output_dir}/refactorings.csv", 'a').write_rows(refactorings)
 
 
@@ -81,8 +81,6 @@ class CodeAnalyzer:
             self.analyze_class_files()
             self.analyze_refactorings(commit_hash)
 
-            
-            
             CsvWriterService(csv_output_dir, 'a').write_row([
                 commit_hash,
                 len(self.scraper.refactorings_found),
