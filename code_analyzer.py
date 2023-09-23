@@ -35,7 +35,7 @@ class CodeAnalyzer:
         refactoring_miner_output_dir = f"{output_dir}/refactoring_miner.json"
 
         with open(refactoring_miner_output_dir, 'w+'):
-            run(f"./RefactoringMiner-2.4.0/bin/RefactoringMiner -c /projects/{self.project} {commit_hash} -json {refactoring_miner_output_dir}", shell=True)
+            run(f"./RefactoringMiner-2.4.0/bin/RefactoringMiner -c /projects/{self.project} {commit_hash} -json {refactoring_miner_output_dir}", shell=True, cwd="/app")
             
         with open(refactoring_miner_output_dir, 'r') as f:
             output_json_data = load(f)
@@ -63,7 +63,7 @@ class CodeAnalyzer:
         return FileSystemService(self.project, commit_hash).create_output_dir()
 
     def analyze_codebase(self):
-        repository_manager = RepositoryManager(self.project, None)
+        repository_manager = RepositoryManager(self.project, None, [])
         commit_list = repository_manager.get_commit_list()
         csv_output_dir = f"output/{self.project}/history.csv"
         shutil.rmtree(csv_output_dir, ignore_errors=True)
@@ -74,8 +74,12 @@ class CodeAnalyzer:
             'MÉTODOS',
             'ASSERÇÕES'
         ])
-
+        merge_commits = {}
         for commit_hash in commit_list[:500]:
+            parents = repository_manager.return_parents_if_merge_commit(commit_hash) 
+            if(parents):
+                fork_commit = repository_manager.discover_fork_commits(commit_hash,parents)
+                merge_commits[commit_hash] = {"parent_1":parents[0],"parent_2":parents[1],"fork_commit":fork_commit} 
             repository_manager.force_reset_to_specific_commit(commit_hash)
             self.analyze_test_files()
             self.analyze_class_files()
@@ -86,7 +90,8 @@ class CodeAnalyzer:
                 len(self.scraper.refactorings_found),
                 len(self.scraper.methods_found),
                 len(self.scraper.assertions_found),
-                # ver informações úteis
+                #ver informações úteis
             ])
 
             self.scraper.clear_findings()
+        print(merge_commits)

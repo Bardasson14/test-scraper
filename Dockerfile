@@ -20,4 +20,7 @@ RUN git clone https://github.com/jenkinsci/jenkins.git /projects/jenkins
 
 VOLUME /projects
 
-CMD python3 main.py
+CMD chmod 777 /app/RefactoringMiner-2.4.0/bin/RefactoringMiner
+
+# CMD python3 main.py
+CMD tail -f
