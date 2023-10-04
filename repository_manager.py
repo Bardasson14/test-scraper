@@ -18,8 +18,7 @@ class RepositoryManager:
 
     def get_commit_list(self):
         cwd = self.get_repository_dir()
-        print(cwd)
-        run('git fetch', capture_output=True, shell=True, cwd=cwd)
+        run('git pull', capture_output=True, shell=True, cwd=cwd)
         return run('git rev-list master --first-parent', capture_output=True, shell=True, cwd=cwd).stdout.decode("utf-8").split()
 
     def force_reset_to_specific_commit(self, commit_hash):

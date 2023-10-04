@@ -1,0 +1,219 @@
+{
+"commits": [
+{
+	"repository": "https://github.com/jenkinsci/jenkins.git",
+	"sha1": "f21cf875dcfa7fb37a699be5000d7c18c46edfc0",
+	"url": "https://github.com/jenkinsci/jenkins/commit/f21cf875dcfa7fb37a699be5000d7c18c46edfc0",
+	"refactorings": [{
+	"type": "Replace Attribute With Variable",
+	"description": "Replace Attribute With Variable upload : ServletFileUpload to upload : ServletFileUpload in method public MultipartFormDataParser(request HttpServletRequest, maxParts int, maxPartSize long, maxSize long) from class hudson.util.MultipartFormDataParser",
+	"leftSideLocations": [{
+		"filePath": "core/src/main/java/hudson/util/MultipartFormDataParser.java",
+		"startLine": 49,
+		"endLine": 49,
+		"startColumn": 37,
+		"endColumn": 94,
+		"codeElementType": "FIELD_DECLARATION",
+		"description": "original variable declaration",
+		"codeElement": "upload : ServletFileUpload"
+}, {
+		"filePath": "core/src/main/java/hudson/util/MultipartFormDataParser.java",
+		"startLine": 75,
+		"endLine": 95,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "original method declaration",
+		"codeElement": "public MultipartFormDataParser(request HttpServletRequest, maxParts int, maxPartSize long, maxSize long)"
+}],
+	"rightSideLocations": [{
+		"filePath": "core/src/main/java/hudson/util/MultipartFormDataParser.java",
+		"startLine": 86,
+		"endLine": 86,
+		"startColumn": 27,
+		"endColumn": 134,
+		"codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+		"description": "renamed variable declaration",
+		"codeElement": "upload : ServletFileUpload"
+}, {
+		"filePath": "core/src/main/java/hudson/util/MultipartFormDataParser.java",
+		"startLine": 77,
+		"endLine": 105,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "method declaration with renamed variable",
+		"codeElement": "public MultipartFormDataParser(request HttpServletRequest, maxParts int, maxPartSize long, maxSize long)"
+}]
+},
+{
+	"type": "Change Variable Type",
+	"description": "Change Variable Type paramsValues : String to param : Map.Entry<String,String> in method private fitsSearchBuildVariables(runAsBuild AbstractBuild<?,?>) : boolean from class jenkins.widgets.HistoryPageFilter",
+	"leftSideLocations": [{
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 374,
+		"endLine": 374,
+		"startColumn": 14,
+		"endColumn": 33,
+		"codeElementType": "SINGLE_VARIABLE_DECLARATION",
+		"description": "original variable declaration",
+		"codeElement": "paramsValues : String"
+}, {
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 372,
+		"endLine": 380,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "original method declaration",
+		"codeElement": "private fitsSearchBuildVariables(runAsBuild AbstractBuild<?,?>) : boolean"
+}],
+	"rightSideLocations": [{
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 376,
+		"endLine": 376,
+		"startColumn": 14,
+		"endColumn": 45,
+		"codeElementType": "SINGLE_VARIABLE_DECLARATION",
+		"description": "changed-type variable declaration",
+		"codeElement": "param : Map.Entry<String,String>"
+}, {
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 373,
+		"endLine": 382,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "method declaration with changed variable type",
+		"codeElement": "private fitsSearchBuildVariables(runAsBuild AbstractBuild<?,?>) : boolean"
+}]
+},
+{
+	"type": "Rename Variable",
+	"description": "Rename Variable paramsValues : String to param : Map.Entry<String,String> in method private fitsSearchBuildVariables(runAsBuild AbstractBuild<?,?>) : boolean from class jenkins.widgets.HistoryPageFilter",
+	"leftSideLocations": [{
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 374,
+		"endLine": 374,
+		"startColumn": 14,
+		"endColumn": 33,
+		"codeElementType": "SINGLE_VARIABLE_DECLARATION",
+		"description": "original variable declaration",
+		"codeElement": "paramsValues : String"
+}, {
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 372,
+		"endLine": 380,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "original method declaration",
+		"codeElement": "private fitsSearchBuildVariables(runAsBuild AbstractBuild<?,?>) : boolean"
+}],
+	"rightSideLocations": [{
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 376,
+		"endLine": 376,
+		"startColumn": 14,
+		"endColumn": 45,
+		"codeElementType": "SINGLE_VARIABLE_DECLARATION",
+		"description": "renamed variable declaration",
+		"codeElement": "param : Map.Entry<String,String>"
+}, {
+		"filePath": "core/src/main/java/jenkins/widgets/HistoryPageFilter.java",
+		"startLine": 373,
+		"endLine": 382,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "method declaration with renamed variable",
+		"codeElement": "private fitsSearchBuildVariables(runAsBuild AbstractBuild<?,?>) : boolean"
+}]
+},
+{
+	"type": "Rename Variable",
+	"description": "Rename Variable lastUploadedPlugin : Optional<File> to lastUploadedPluginDir : Optional<File> in method public verifyUploadedPluginPermission() : void from class hudson.PluginManagerTest",
+	"leftSideLocations": [{
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 755,
+		"endLine": 755,
+		"startColumn": 36,
+		"endColumn": 215,
+		"codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+		"description": "original variable declaration",
+		"codeElement": "lastUploadedPlugin : Optional<File>"
+}, {
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 736,
+		"endLine": 764,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "original method declaration",
+		"codeElement": "public verifyUploadedPluginPermission() : void"
+}],
+	"rightSideLocations": [{
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 758,
+		"endLine": 761,
+		"startColumn": 36,
+		"endColumn": 78,
+		"codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+		"description": "renamed variable declaration",
+		"codeElement": "lastUploadedPluginDir : Optional<File>"
+}, {
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 737,
+		"endLine": 775,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "method declaration with renamed variable",
+		"codeElement": "public verifyUploadedPluginPermission() : void"
+}]
+},
+{
+	"type": "Rename Variable",
+	"description": "Rename Variable tmpDir : File to filesRef : File in method public verifyUploadedPluginPermission() : void from class hudson.PluginManagerTest",
+	"leftSideLocations": [{
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 749,
+		"endLine": 749,
+		"startColumn": 14,
+		"endColumn": 79,
+		"codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+		"description": "original variable declaration",
+		"codeElement": "tmpDir : File"
+}, {
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 736,
+		"endLine": 764,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "original method declaration",
+		"codeElement": "public verifyUploadedPluginPermission() : void"
+}],
+	"rightSideLocations": [{
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 750,
+		"endLine": 750,
+		"startColumn": 14,
+		"endColumn": 69,
+		"codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+		"description": "renamed variable declaration",
+		"codeElement": "filesRef : File"
+}, {
+		"filePath": "test/src/test/java/hudson/PluginManagerTest.java",
+		"startLine": 737,
+		"endLine": 775,
+		"startColumn": 5,
+		"endColumn": 6,
+		"codeElementType": "METHOD_DECLARATION",
+		"description": "method declaration with renamed variable",
+		"codeElement": "public verifyUploadedPluginPermission() : void"
+}]
+}
+]
+}]
+}
