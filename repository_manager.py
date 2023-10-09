@@ -19,11 +19,14 @@ class RepositoryManager:
     def get_commit_list(self):
         cwd = self.get_repository_dir()
         run('git pull', capture_output=True, shell=True, cwd=cwd)
-        return run('git rev-list master --first-parent', capture_output=True, shell=True, cwd=cwd).stdout.decode("utf-8").split()
+        main_branch = run('git branch', capture_output=True, shell=True, cwd=cwd).stdout.decode("utf-8").strip('\n').split('* ')[1]
+        print(f"main_branch: {main_branch}")
+        return run(f"git rev-list {main_branch} --first-parent", capture_output=True, shell=True, cwd=cwd).stdout.decode("utf-8").split()
 
     def force_reset_to_specific_commit(self, commit_hash):
         run(f"git reset --hard {commit_hash}", shell=True, cwd=self.get_repository_dir())
         run(f"git rev-parse HEAD {commit_hash}", shell=True, cwd=self.get_repository_dir())
+        print(f"RESET TO {commit_hash}")
 
     def return_parents_if_merge_commit(self, commit_hash):
         parents = []
