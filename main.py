@@ -8,8 +8,8 @@ import multiprocessing as mp
 import pandas as pd
 
 # PROJECTS_DIR = '../projects/'
-ACCEPTED_PROJECTS = ['Activiti', 'antlr4', 'dbeaver', 'ExoPlayer', 'incubator-druid', 'incubator-shardingsphere', 'RxJava']
-
+# ACCEPTED_PROJECTS = ['Activiti', 'antlr4', 'dbeaver', 'ExoPlayer', 'incubator-druid', 'incubator-shardingsphere', 'RxJava']
+ACCEPTED_PROJECTS = ['Activiti']
 def run_analysis_for_commit(df, row_index):
     row = df.iloc[row_index]
     project_name = row.iloc[1]

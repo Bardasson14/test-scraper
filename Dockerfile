@@ -22,6 +22,6 @@ RUN ./clone_repositories.sh
 VOLUME /projects
 
 RUN chmod 777 /app/RefactoringMiner-2.4.0/bin/RefactoringMiner
-CMD python3 main.py
+# CMD python3 main.py
 
-# CMD tail -f
+CMD tail -f
