@@ -4,5 +4,10 @@ services:
     build: .
     volumes:
       - ./:/app
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 2000M
+
     # env_file:
     #   - .env
