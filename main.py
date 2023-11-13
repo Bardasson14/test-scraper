@@ -8,7 +8,6 @@ import pandas as pd
 import cProfile
 
 ACCEPTED_PROJECTS = [
-    
     # 'Activiti',
     # 'antlr4',
     # 'arduino',
@@ -24,13 +23,13 @@ ACCEPTED_PROJECTS = [
     # 'hadoop',
     # 'incubator-druid', 
     # 'incubator-shardingsphere',
-    # 'jenkins',-
+    # 'jenkins',
     # 'libgdx',
     # 'netty',
-    'nokogiri',
+    # 'nokogiri',
     # 'pinpoint',
     # 'processing',
-    # 'realm-java',
+    'realm-java',
     # 'redisson',
     # 'RxJava',
     # 'skywalking',
@@ -38,26 +37,22 @@ ACCEPTED_PROJECTS = [
     # 'zaproxy',
 ]
 
-def run_analysis(sub_data_frame):
+def run_analysis(sub_data_frame, df):
     for index, row in sub_data_frame.iterrows():
-        print(f"LINHA {index} - {row['project_name']}")
-        CodeAnalyzer(row['project_name']).analyze_codebase(row['sha1'])
+        print(f"INDEX: {index}")
+        CodeAnalyzer(row['project_name']).analyze_codebase(row['sha1'], df)
 
 if __name__ == "__main__":
     with open('merge_refactoring_ds.csv') as f:
         csv_rows = pd.read_csv(f, header=0, chunksize=2000)
         df = pd.concat(csv_rows)
-        df = df.iloc[:1000] # remover
-        # start = time.time()
+        df['current_coverage'] = "0%"
+        df['previous_coverage'] = "0%"
+        df['coverage_diff'] = "+0%"
+
+        print(df)
 
         for project in ACCEPTED_PROJECTS:
             print(project)
             query_result = df.query(f"project_name=='{project}'")
-            cProfile.run('run_analysis(query_result)')
-# 
-        # for i in range(0, len(df.index)):
-        #     run_analysis_for_commit(df, i)
-# 
-        # end = time.time()
-        # 
-        # print(f"Tempo total: {end - start}")
+            run_analysis(query_result, df)
