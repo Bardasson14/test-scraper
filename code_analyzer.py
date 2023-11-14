@@ -21,10 +21,10 @@ class CodeAnalyzer:
     def analyze_test_files(self):
         for path in Path(self.get_base_dir()).rglob('*.java'):
             if search("Test", str(path.resolve()).split(".")[-2]):
-                with open(path, 'r') as f:
+                with open(path, 'r', errors='ignore') as f:
                     self.scraper.gather_test_info(f)
             else:
-                with open(path, 'r') as f:
+                with open(path, 'r', errors='ignore') as f:
                     self.scraper.gather_method_info(f)
 
     def analyze_refactorings(self, commit_hash):
@@ -79,8 +79,8 @@ class CodeAnalyzer:
                 print(f"POSSUI TESTE: ${has_associated_test}")
                 print(f"COMMIT ANTERIOR: ${previous_commit_hash}")
                 print(f"COMMIT ATUAL: ${commit_hash}")
-                print(f"método original: ${previous_method_signature}")
-                print(f"método refatorado: ${method_signature}")
+                print(f"método original: ${previous_method_name}")
+                print(f"método refatorado: ${method_name}")
 
                 refactorings.append([
                     refactor['type'],
@@ -106,19 +106,21 @@ class CodeAnalyzer:
 
             CsvWriterService(f"{output_dir}/refactorings.csv", 'a').write_rows(refactorings)
 
-    def check_if_method_has_associated_test(self, file_path, target_member): # target_member não é o suficiente
-
+    def check_if_method_has_associated_test(self, file_path, target_member):
         class_name = file_path.split('/')[-1].split('.')[0]
         test_files = list(filter(lambda f: search(f"{class_name}Test", str(f.resolve()).split('/')[-1].split('.')[0]), Path(self.get_base_dir()).rglob('*.java')))
 
         print(f"TEST_FILES: {test_files}")
+        print(f"TARGET_MEMBER: {target_member}")
         
         for test_file in test_files:
             parsed_test_file = str(test_file.resolve())
             invocated_methods = run(f"java -jar JavaParser.jar {parsed_test_file}", shell=True, capture_output=True).stdout.decode('utf-8').split()
+            print(f"INVOCATED METHODS: {invocated_methods}")
 
             if invocated_methods:
                 matching_invocations = list(filter(lambda m: search(f".{target_member}\s*\([^)]*\)", m), invocated_methods))
+                print(f"MATCHING INVOCATIONS: {matching_invocations}")
 
                 if len(matching_invocations) > 0: 
                     return True
@@ -133,8 +135,6 @@ class CodeAnalyzer:
         return FileSystemService(self.project, commit_hash).create_output_dir()
 
     def analyze_codebase(self, commit_hash, df):
-
-        print(f"comecou {self.project}")
         repository_manager = RepositoryManager(self.project, None, [])
         repository_manager.force_reset_to_specific_commit(commit_hash)
         
@@ -156,7 +156,6 @@ class CodeAnalyzer:
         print(f"COVERAGE DIFF: {coverage_diff}")
 
         row = df.query(f"project_name=='{self.project}' & sha1=='{commit_hash}'")
-        print(f"row_index: {row.index[0]}")
 
         df.iloc[row.index[0], -3] = f"{current_coverage * 100}%"
         df.iloc[row.index[0], -2] = f"{previous_coverage * 100}%"

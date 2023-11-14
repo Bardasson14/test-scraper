@@ -27,8 +27,6 @@ class RepositoryManager:
         start = time()
         call(f"git reset --hard {commit_hash}", shell=True, cwd=self.get_repository_dir())
         end = time()
-
-        print(f"git command: {end - start}s")
         print(f"RESET TO {commit_hash}")
 
     def return_parents_if_merge_commit(self, commit_hash):

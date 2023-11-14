@@ -1,6 +1,7 @@
 #!/bin/bash
 
 declare -a repositories=(
+    # "https://github.com/ankidroid/Anki-Android"
     # "https://github.com/Activiti/Activiti"
     # "https://github.com/antlr/antlr4"
     # "https://github.com/arduino/arduino"
@@ -11,7 +12,7 @@ declare -a repositories=(
     # "https://github.com/apache/druid"
     # "https://github.com/elastic/elasticsearch"
     # "https://github.com/google/ExoPlayer"
-    # "https://github.com/gephi/gephi",
+    "https://github.com/gephi/gephi"
     # "https://github.com/gocd/gocd"
     # "https://github.com/apache/hadoop"
     # "https://github.com/adobe/incubator-druid"
@@ -19,10 +20,10 @@ declare -a repositories=(
     # "https://github.com/jenkinsci/jenkins"
     # "https://github.com/libgdx/libgdx"
     # "https://github.com/netty/netty"
-    # "https://github.com/sparklemotion/nokogiri"
+    "https://github.com/sparklemotion/nokogiri"
     # "https://github.com/pinpoint-apm/pinpoint"
     # "https://github.com/processing/processing"
-    "https://github.com/realm/realm-java"
+    # "https://github.com/realm/realm-java"
     # "https://github.com/redisson/redisson"
     # "https://github.com/ReactiveX/RxJava"
     # "https://github.com/apache/skywalking"
