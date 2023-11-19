@@ -27,12 +27,10 @@ class CodeAnalyzer:
                 with open(path, 'r', errors='ignore') as f:
                     self.scraper.gather_method_info(f)
 
-    def analyze_refactorings(self, commit_hash):
+    def analyze_refactorings(self, commit_hash, previous_commits):
         output_dir = self.setup_output_folders(commit_hash)
         refactoring_miner_output_dir = f"{output_dir}/refactoring_miner.json"
-        previous_commit_hash = run(f"git rev-parse {commit_hash}~1", shell=True, capture_output=True).stdout.decode('utf-8').split('~')[0]
-    
-
+        
         with open(refactoring_miner_output_dir, 'w+'):
             call(f"./RefactoringMiner-2.4.0/bin/RefactoringMiner -c /projects/{self.project} {commit_hash} -json {refactoring_miner_output_dir}", shell=True, cwd="/app")
 
@@ -71,16 +69,15 @@ class CodeAnalyzer:
                 method_name = method_signature[1].split("(")[0]
 
                 has_associated_test = self.check_if_method_has_associated_test(post_refactor_location['filePath'], method_name)
-                repository_manager = RepositoryManager(self.project, None, [])
-                repository_manager.force_reset_to_specific_commit(previous_commit_hash)
-                had_associated_test = self.check_if_method_has_associated_test(pre_refactor_location['filePath'], previous_method_name)
-
-                print(f"POSSUÍA TESTE: ${had_associated_test}")
-                print(f"POSSUI TESTE: ${has_associated_test}")
-                print(f"COMMIT ANTERIOR: ${previous_commit_hash}")
-                print(f"COMMIT ATUAL: ${commit_hash}")
-                print(f"método original: ${previous_method_name}")
-                print(f"método refatorado: ${method_name}")
+                had_associated_test = False
+                
+                for commit in previous_commits:
+                    repository_manager = RepositoryManager(self.project, None, [])
+                    repository_manager.force_reset_to_specific_commit(commit)
+                    
+                    if self.check_if_method_has_associated_test(pre_refactor_location['filePath'], previous_method_name):
+                        had_associated_test = True
+                        break
 
                 refactorings.append([
                     refactor['type'],
@@ -95,16 +92,15 @@ class CodeAnalyzer:
                 print(refactorings)
                 self.scraper.refactorings_found = refactorings
 
-            CsvWriterService(f"{output_dir}/refactorings.csv", 'w+').write_row([
-                'TIPO',
-                'ARQUIVO',
-                'LINHA INICIAL', 
-                'LINHA FINAL',
-                'POSSUI TESTE?',
-                'POSSUÍA TESTE?'
-            ])
-
-            CsvWriterService(f"{output_dir}/refactorings.csv", 'a').write_rows(refactorings)
+            # CsvWriterService(f"{output_dir}/refactorings.csv", 'w+').write_row([
+            #     'TIPO',
+            #     'ARQUIVO',
+            #     'LINHA INICIAL', 
+            #     'LINHA FINAL',
+            #     'POSSUI TESTE?',
+            #     'POSSUÍA TESTE?'
+            # ])
+            # CsvWriterService(f"{output_dir}/refactorings.csv", 'a').write_rows(refactorings)
 
     def check_if_method_has_associated_test(self, file_path, target_member):
         class_name = file_path.split('/')[-1].split('.')[0]
@@ -134,31 +130,37 @@ class CodeAnalyzer:
     def setup_output_folders(self, commit_hash):
         return FileSystemService(self.project, commit_hash).create_output_dir()
 
-    def analyze_codebase(self, commit_hash, df):
+    def analyze_codebase(self, row, df):
+        commit_hash = row['sha1']
+        # previous_commits = [row['parent1'], row['parent2']]
+        previous_commits = []
         repository_manager = RepositoryManager(self.project, None, [])
         repository_manager.force_reset_to_specific_commit(commit_hash)
         
-        self.analyze_test_files()
-        self.analyze_refactorings(commit_hash)
+        self.analyze_refactorings(commit_hash, previous_commits)
         print(self.scraper.refactorings_found)
 
         current_coverage = 0
         previous_coverage = 0
-        coverage_diff = 0
+        coverage_diff = real_coverage_diff = 0
 
         if self.scraper.refactorings_found:
             current_coverage = len(list(filter(lambda x: x[-2], self.scraper.refactorings_found))) / len(self.scraper.refactorings_found)
             previous_coverage = len(list(filter(lambda x: x[-1], self.scraper.refactorings_found))) /  len(self.scraper.refactorings_found)
             coverage_diff = current_coverage - previous_coverage
 
+            if previous_coverage:
+                real_coverage_diff = current_coverage/previous_coverage - 1
+
         print(f"CURRENT COVERAGE: {current_coverage}")
         print(f"PREVIOUS COVERAGE: {previous_coverage}")
         print(f"COVERAGE DIFF: {coverage_diff}")
+        print(f"REAL COVERAGE DIFF: {real_coverage_diff}")
 
         row = df.query(f"project_name=='{self.project}' & sha1=='{commit_hash}'")
 
-        df.iloc[row.index[0], -3] = f"{current_coverage * 100}%"
-        df.iloc[row.index[0], -2] = f"{previous_coverage * 100}%"
-        df.iloc[row.index[0], -1] = f"{'-' if coverage_diff < 0 else '+'}{coverage_diff*100}%"
-        df.to_csv('merge_refactoring_ds.csv')
+        # df.iloc[row.index[0], -3] = f"{current_coverage * 100}%"
+        # df.iloc[row.index[0], -2] = f"{previous_coverage * 100}%"
+        # df.iloc[row.index[0], -1] = f"{'-' if coverage_diff < 0 else '+'}{coverage_diff*100}%"
+        # df.to_csv('merge_refactoring_ds.csv')
         self.scraper.clear_findings()

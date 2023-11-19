@@ -24,9 +24,8 @@ class RepositoryManager:
         return run(f"git rev-list {main_branch} --first-parent", capture_output=True, shell=True, cwd=cwd, stdout=DEVNULL).stdout.decode("utf-8").split()
 
     def force_reset_to_specific_commit(self, commit_hash):
-        start = time()
-        call(f"git reset --hard {commit_hash}", shell=True, cwd=self.get_repository_dir())
-        end = time()
+        run(f"git reset --hard {commit_hash} && git clean -f", shell=True, cwd=self.get_repository_dir())
+        #.stdout.decode('utf-8')
         print(f"RESET TO {commit_hash}")
 
     def return_parents_if_merge_commit(self, commit_hash):
