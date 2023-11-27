@@ -105,14 +105,22 @@ class CodeAnalyzer:
         post_refactor_info = refactor['rightSideLocations'][0]
         previous_method_signature = pre_refactor_info['codeElement'].split() 
         current_method_signature = post_refactor_info['codeElement'].split()
-
-        print(previous_method_signature)
         
+        if len(previous_method_signature) > 1:
+            previous_method_name = previous_method_signature[1].split("(")[0]
+        else:
+            previous_method_name = previous_method_signature[0]
+
+        if len(current_method_signature) > 1:
+            current_method_name = current_method_signature[1].split("(")[0]
+        else:
+            current_method_name = current_method_signature[0]
+
         return {
             'pre_refactor_location': pre_refactor_info,
             'post_refactor_location': post_refactor_info,
-            'previous_method_name': previous_method_signature[1].split("(")[0],
-            'current_method_name':  current_method_signature[1].split("(")[0]
+            'previous_method_name': previous_method_name,
+            'current_method_name':  current_method_name
         }
 
     def get_output_dir(self, commit_hash):
