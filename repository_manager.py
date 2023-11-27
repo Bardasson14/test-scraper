@@ -3,10 +3,9 @@ import re
 from time import time
 
 class RepositoryManager:
-    def __init__(self, project, commit_hash, parent_commit_family):
+    def __init__(self, project, commit_hash):
         self.project = project
         self.commit_hash = commit_hash
-        self.parent_commit_family = parent_commit_family
 
     def get_repository_dir(self):
         return f"../projects/{self.project}"
@@ -26,7 +25,7 @@ class RepositoryManager:
     def force_reset_to_specific_commit(self, commit_hash):
         run(f"git reset --hard {commit_hash} && git clean -f", shell=True, cwd=self.get_repository_dir())
         #.stdout.decode('utf-8')
-        print(f"RESET TO {commit_hash}")
+        # print(f"RESET TO {commit_hash}")
 
     def return_parents_if_merge_commit(self, commit_hash):
         parents = []

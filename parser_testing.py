@@ -39,11 +39,11 @@ def check_if_has_associated_test():
                                     invocation_nodes = filter(lambda n: type(n) == javalang_custom.tree.MethodInvocation, flatten_list(node.children))
                                     for invocation_node in invocation_nodes:
                                         if invocation_node.member == target_member:
-                                            # print(path)
-                                            # print(f"{invocation_node.qualifier}.{invocation_node.member}({invocation_node.arguments})")
+                                            # # print(path)
+                                            # # print(f"{invocation_node.qualifier}.{invocation_node.member}({invocation_node.arguments})")
                                             return True
                     except javalang_custom.parser.JavaSyntaxError as err:
-                        print("Exception", err) # DESCONDIDERAR ERROS DE SINTAXE
+                        # print("Exception", err) # DESCONDIDERAR ERROS DE SINTAXE
     return False
 
 check_if_has_associated_test()

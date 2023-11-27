@@ -12,11 +12,7 @@ class CodeScraper:
         self.clear_findings()
 
     def clear_findings(self):
-        self.annotations_found = []
-        self.imports_found = []
-        self.methods_found = []
-        self.assertions_found = []
-        self.refactorings_found = []
+        self.refactorings_found = {}
 
     def find_imports(self, line, index):
         for regex in IMPORTS:
