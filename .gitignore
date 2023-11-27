@@ -3,3 +3,4 @@ projects/
 .env
 output/*
 *.pyc
+test_output.csv
