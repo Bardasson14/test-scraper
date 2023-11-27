@@ -4,6 +4,7 @@ from code_analyzer import CodeAnalyzer
 from concurrent import futures
 import multiprocessing as mp
 import pandas as pd
+import argparse
 
 '''
 ACCEPTED_PROJECTS = [
@@ -27,9 +28,16 @@ def run_analysis(df):
     # for index, row in sub_data_frame.iterrows():
     CodeAnalyzer().analyze_codebase(df)
 
-if __name__ == '__main__':
-    with open('full_extract.csv') as f:
+def main():
+    parser = argparse.ArgumentParser()	
+    parser.add_argument("--project", help="executed project") 
+    args = parser.parse_args()
+    file_name = "/files/" + args.project + ".csv" 
+
+    with open(file_name) as f:
         csv_rows = pd.read_csv(f, header=0, chunksize=2000)
         df = pd.concat(csv_rows)
-        df = df.iloc[34503:37593] # only mockito
         run_analysis((df))
+
+if __name__ == '__main__':
+    main()
