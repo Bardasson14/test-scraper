@@ -4,6 +4,8 @@ services:
     build: .
     volumes:
       - ./:/app
+    environment:
+      - PROJECT: ${PROJECT}
     # deploy:
     #   resources:
     #     limits:

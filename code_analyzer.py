@@ -16,7 +16,8 @@ class CodeAnalyzer:
         self.set_project(project)
         
     def get_base_dir(self):
-        return f"../projects/{self.project}"
+        # return f"../projects/{self.project}"
+        return f"projects/{self.project}"
     
     def analyze_test_files(self):
         for path in Path(self.get_base_dir()).rglob('*.java'):
@@ -47,7 +48,7 @@ class CodeAnalyzer:
                     refactor['commits_before_testing'] = commit_distance
 
         with open(refactoring_miner_output_dir, 'a+'):
-            call(f"./RefactoringMiner-2.4.0/bin/RefactoringMiner -c /projects/{self.project} {commit_hash} -json {refactoring_miner_output_dir}", shell=True, cwd="/app")
+            call(f"./RefactoringMiner-2.4.0/bin/RefactoringMiner -c projects/{self.project} {commit_hash} -json {refactoring_miner_output_dir}", shell=True)
 
         with open(refactoring_miner_output_dir, 'r') as f:
             output_json_data = load(f)
@@ -132,7 +133,7 @@ class CodeAnalyzer:
     def analyze_codebase(self, df):
         current_type_branch = None
 
-        writer_service = CsvWriterService('test_output.csv', 'a')
+        writer_service = CsvWriterService(f"{self.project}.csv", 'a')
         writer_service.write_row([
             'commit_hash',
             'total_refactorings',
@@ -148,6 +149,7 @@ class CodeAnalyzer:
         for index, row in df.iterrows():
             if row['name'] != self.project:
                 self.set_project(row['name'])
+                print(self.project)
             
             if current_type_branch and current_type_branch != row['type_branch']: # branch aberta
                 rows = []

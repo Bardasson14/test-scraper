@@ -8,7 +8,8 @@ class RepositoryManager:
         self.commit_hash = commit_hash
 
     def get_repository_dir(self):
-        return f"../projects/{self.project}"
+        # return f"../projects/{self.project}"
+        return f"projects/{self.project}"
 
     def get_output_dir(self):
         return f"output/{self.project}/{self.commit_hash}"
