@@ -11,12 +11,11 @@ from json import load
 from time import time
 
 class CodeAnalyzer:
-    def __init__(self, project=None):
+    def __init__(self, project):
+        self.project = project
         self.scraper = CodeScraper(project)
-        self.set_project(project)
         
     def get_base_dir(self):
-        # return f"../projects/{self.project}"
         return f"projects/{self.project}"
     
     def analyze_test_files(self):
@@ -28,17 +27,13 @@ class CodeAnalyzer:
                 with open(path, 'r', errors='ignore') as f:
                     self.scraper.gather_method_info(f)
 
-    def set_project(self, project):
-        self.project = project
-        self.scraper.project = project
-
-    def analyze_refactorings(self, commit_hash, previous_commit_hash): # TODO -
+    def analyze_refactorings(self, commit_hash, previous_commit_hash):
         output_dir = self.setup_output_folders(commit_hash)
         refactoring_miner_output_dir = f"{output_dir}/refactoring_miner.json"
         commit_list = list(self.scraper.refactorings_found.keys())
         commit_list.append(commit_hash)
 
-        for previous_commit_hash in self.scraper.refactorings_found.keys():# filter(lambda r: r[1]['associated_test_commit'] is None, self.scraper.refactorings_found.items()):
+        for previous_commit_hash in self.scraper.refactorings_found.keys():
             commit_distance = commit_list.index(commit_hash) - commit_list.index(previous_commit_hash)
             previous_refactorings = filter(lambda r: r['associated_test_commit'] is None, self.scraper.refactorings_found[previous_commit_hash])
 
@@ -132,38 +127,45 @@ class CodeAnalyzer:
 
     def analyze_codebase(self, df):
         current_type_branch = None
+        current_merge_commit = None
 
-        writer_service = CsvWriterService(f"{self.project}.csv", 'a')
+        if os.path.exists(f"results/{self.project}.csv"):
+            os.remove(f"results/{self.project}.csv")
+
+        writer_service = CsvWriterService(f"results/{self.project}.csv", 'a+')
         writer_service.write_row([
             'commit_hash',
             'total_refactorings',
             'extract_method',
             'inline_method',
             'rename_method',
+            'total_tests_before_refactorings',
+            'total_tests_after_refactoring',
             'test_coverage_before_refactorings',
-            'test_coverage_after_refactorings'
+            'test_coverage_after_refactorings',
             'refactoring_coverage_impact',
-            'avg_commits_before_testing'
+            'avg_commits_before_testing',
+            'sha1_merge_commit',
+            'type_branch'
         ])
 
         for index, row in df.iterrows():
-            if row['name'] != self.project:
-                self.set_project(row['name'])
-                print(self.project)
-            
             if current_type_branch and current_type_branch != row['type_branch']: # branch aberta
                 rows = []
                 
                 for entry in self.scraper.refactorings_found.items():
-                    test_coverage_before_refactorings = 0.0
-                    test_coverage_after_refactorings = 0.0
-                    avg_commits_before_testing = 0.0
-                    refactoring_coverage_impact = 0.0
-                
                     commit_sha1 = entry[0]
                     commit_refactorings = entry[1]
                     tested_refactorings = list(filter(lambda r: r['associated_test_commit'] is not None, commit_refactorings))
 
+                    test_coverage_before_refactorings = 0.0
+                    test_coverage_after_refactorings = 0.0
+                    avg_commits_before_testing = 0.0
+                    refactoring_coverage_impact = 0.0
+
+                    previously_tested_methods = len(list(filter(lambda r: r['had_associated_test_before_refactor'], commit_refactorings)))
+                    currently_tested_methods = len(list(filter(lambda r: r['associated_test_commit'] is not None, commit_refactorings)))
+                
                     if len(commit_refactorings) > 0:
 
                         test_coverage_before_refactorings = len(list(filter(lambda r: r['had_associated_test_before_refactor'], commit_refactorings))) / len(commit_refactorings)
@@ -179,19 +181,23 @@ class CodeAnalyzer:
                         len(list(filter(lambda r: r['type'] == 'Extract Method', commit_refactorings))),
                         len(list(filter(lambda r: r['type'] == 'Inline Method', commit_refactorings))),
                         len(list(filter(lambda r: r['type'] == 'Rename Method', commit_refactorings))),
+                        previously_tested_methods,
+                        currently_tested_methods,
                         test_coverage_before_refactorings,
                         test_coverage_after_refactorings,
                         refactoring_coverage_impact,
-                        avg_commits_before_testing
+                        avg_commits_before_testing,
+                        current_merge_commit,
+                        current_type_branch
                     ])
 
                 writer_service.write_rows(rows)
                 self.scraper.clear_findings()
 
             current_type_branch = row['type_branch']
+            current_merge_commit = row['sha1_merge_commit']
             commit_hash = row['sha1']
             repository_manager = RepositoryManager(row['name'], None)
             repository_manager.force_reset_to_specific_commit(commit_hash)
             
             self.analyze_refactorings(commit_hash, row['parent'])
-            # print(self.scraper.refactorings_found)

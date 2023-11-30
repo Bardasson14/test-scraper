@@ -1,6 +1,8 @@
 /__pycache__/
-projects/
+projects/*
+results/*.csv
 .env
 output/*
 *.pyc
 test_output.csv
+__pycache__/
